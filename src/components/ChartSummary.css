@@ -8,6 +8,15 @@
   border: 1px solid #e4e2db;
 }
 
+.sun-boundary-note {
+  margin: 10px 0 0;
+  padding: 10px;
+  background: #f2f2eb;
+  color: #646860;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
 .reading-card {
   align-items: flex-start;
 }
@@ -284,6 +293,56 @@
   font-family: var(--serif);
   font-size: 22px;
   font-weight: 400;
+}
+
+.personal-reading-copy h4 {
+  margin: 15px 0 8px;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.placement-style-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.placement-style-card {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #e6e3dc;
+  background: #faf9f5;
+}
+
+.placement-style-card h4 {
+  margin-top: 0;
+}
+
+.placement-style-card > strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #536453;
+  font-size: 10px;
+}
+
+.placement-style-card small {
+  display: block;
+  color: #747770;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .placement-style-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .placement-style-card > strong {
+    font-size: 14px;
+  }
 }
 
 .personal-reading-copy p {

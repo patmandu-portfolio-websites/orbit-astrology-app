@@ -1,6 +1,6 @@
 import { houses, signs } from '../data/astrology.js';
 
-const signVoices = {
+export const signVoices = {
   Aries: {
     qualities: 'directness, courage, and a readiness to begin',
     strengths: 'taking initiative, acting decisively, and bringing fresh energy',

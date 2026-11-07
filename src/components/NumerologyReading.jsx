@@ -26,8 +26,8 @@ function astrologyLink(numberLabel, number, placement, connection) {
 
 export default function NumerologyReading({ birthDate, birthName, chart }) {
   const reading = calculateNumerology(birthDate, birthName);
-  const sun = chart.placements.find((placement) => placement.name === 'Sun');
-  const moon = chart.placements.find((placement) => placement.name === 'Moon');
+  const sun = chart.birthTimeUnknown ? null : chart.placements.find((placement) => placement.name === 'Sun');
+  const moon = chart.birthTimeUnknown ? null : chart.placements.find((placement) => placement.name === 'Moon');
   const rising = chart.ascendant;
 
   return <section className="numerology-section" id="numerology" aria-labelledby="numerology-title">
@@ -55,6 +55,7 @@ export default function NumerologyReading({ birthDate, birthName, chart }) {
         <span className="eyebrow">Two symbolic lenses, one reflection</span>
         <h3 id="numerology-bridge-title">Where numerology and astrology meet</h3>
         <p>These pairings are a conversational way to explore both systems, not a traditional rule that one number belongs to one planet. Notice what resonates and leave what does not.</p>
+        {chart.birthTimeUnknown && <p>Numerology does not require a birth time. Personalized astrology pairings are omitted here because your birth time is unknown; use the date-only sign possibilities above as tentative reflection prompts.</p>}
       </div>
       <div className="numerology-bridge-grid">
         {sun && astrologyLink('Life Path', reading.lifePath, sun, (sign, guidance) =>

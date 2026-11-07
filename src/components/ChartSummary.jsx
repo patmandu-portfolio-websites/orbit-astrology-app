@@ -30,7 +30,9 @@ export function ChartSummary({ chart, personName }) {
   const zodiacLabel = chart.zodiacMode === 'sidereal' ? 'Sidereal · Lahiri' : 'Tropical';
   const houseLabel = { 'whole-sign': 'Whole Sign', equal: 'Equal', porphyry: 'Porphyry' }[chart.houseSystem];
   const planetMeanings = Object.fromEntries(planets.map((planet) => [planet.name, planet.text]));
-  const signMeanings = Object.fromEntries(signs.map((sign) => [sign.name, `${sign.name} is a ${sign.mode.toLowerCase()} ${sign.element.toLowerCase()} sign, associated with ${sign.ruler} and ${sign.date}.`]));
+  const signMeanings = Object.fromEntries(signs.map((sign) => [sign.name, `${sign.name} is a ${sign.mode.toLowerCase()} ${sign.element.toLowerCase()} sign, associated with ${sign.ruler}. Its calendar dates are only an approximate tropical Sun-sign guide; placements use the calculated position at birth.`]));
+  const sun = chart.placements.find((placement) => placement.name === 'Sun');
+  const sunNearBoundary = sun && (sun.degree < 1 || sun.degree >= 29);
 
   return <section className="chart-section" id="chart">
     <SectionHeading eyebrow="Your personal sky" title={`A map of ${firstName}’s sky`} description="A snapshot of the planets at the moment and place you were born." action={{ href: '#placements', label: 'See all placements' }} />
@@ -56,6 +58,7 @@ export function ChartSummary({ chart, personName }) {
             <span className="big-three-info"><span className="big-three-label">{placement.name === 'Ascendant' ? 'Rising' : placement.name}</span><strong>{placement.sign.name}</strong><span>{placement.theme}</span></span>
             <span className="big-three-degree">{Math.floor(placement.degree)}°{String(Math.floor((placement.degree % 1) * 60)).padStart(2, '0')}′</span>
           </button>)}
+          {sunNearBoundary && <p className="sun-boundary-note">Your Sun is near a sign boundary at {sun.degree.toFixed(2)}° {sun.sign.name}. This chart uses its calculated position, not a fixed birthday cutoff. For tropical charts, the change can fall on different dates or times depending on the year and time zone; sidereal charts use different boundaries.</p>}
         </div>
         <div className="reading-card">
           <span className="reading-spark">✳</span>
@@ -95,6 +98,17 @@ export function ChartSummary({ chart, personName }) {
     <section className="personal-reading" aria-labelledby="personal-reading-title">
       <div><span className="eyebrow">A beginner-friendly reading</span><h3 id="personal-reading-title">How your placements work together</h3></div>
       <div className="personal-reading-copy">{interpretation.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <h4>One chart, different sides of experience</h4>
+        {interpretation.synthesis.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <p>Being near a sign boundary does not assign a planet to two signs in this chart. Other signs contribute through their own planetary placements and house cusps—not because a nearby sign automatically blends into your Sun sign.</p>
+        <div className="placement-style-grid">
+          {interpretation.placementStyles.map((style) => <article className="placement-style-card" key={style.name}>
+            <h4>{style.name} in {style.sign}</h4>
+            <strong>{style.theme}</strong>
+            <p>{style.description}</p>
+            <small>{style.context}</small>
+          </article>)}
+        </div>
         <div className="element-insight"><Sparkles size={15} /><span>{interpretation.elementDescription}</span></div>
         <small>{interpretation.note}</small>
       </div>

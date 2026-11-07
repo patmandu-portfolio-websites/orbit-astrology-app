@@ -27,6 +27,7 @@ export default function BirthForm({ onSubmit, busy }) {
   const [longitude, setLongitude] = useState(initial.longitude);
   const [birthDate, setBirthDate] = useState(initial.birthDate);
   const [birthTime, setBirthTime] = useState(initial.birthTime);
+  const [birthTimeUnknown, setBirthTimeUnknown] = useState(false);
   const [timezoneId, setTimezoneId] = useState(() => timezoneForCoordinates(initial.latitude, initial.longitude));
   const [automaticOffset, setAutomaticOffset] = useState(() => offsetForLocalDateTime(
     timezoneForCoordinates(initial.latitude, initial.longitude),
@@ -53,22 +54,25 @@ export default function BirthForm({ onSubmit, busy }) {
 
   useEffect(() => {
     try {
-      setAutomaticOffset(offsetForLocalDateTime(timezoneId, birthDate, birthTime));
+      setAutomaticOffset(offsetForLocalDateTime(timezoneId, birthDate, birthTimeUnknown ? '12:00' : birthTime));
       setTimezoneError('');
     } catch (error) {
       setAutomaticOffset(null);
       setTimezoneError(error.message || 'Could not determine the UTC offset for this birth time.');
     }
-  }, [timezoneId, birthDate, birthTime]);
+  }, [timezoneId, birthDate, birthTime, birthTimeUnknown]);
 
   function handleSubmit(event) {
     event.preventDefault();
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
+    values.birthTimeUnknown = birthTimeUnknown;
+    if (birthTimeUnknown) values.birthTime = '12:00';
     if (manualOffset === null) {
       try {
         const zone = timezoneForCoordinates(values.latitude, values.longitude);
         const offset = offsetForLocalDateTime(zone, values.birthDate, values.birthTime);
         values.timezoneOffset = String(offset);
+        values.timezoneId = zone;
         setTimezoneId(zone);
         setAutomaticOffset(offset);
         setTimezoneError('');
@@ -141,8 +145,10 @@ export default function BirthForm({ onSubmit, busy }) {
     <Field label="Full birth name (optional)" hint="Used only for optional numerology name numbers; it is not sent to any service."><input name="birthName" autoComplete="off" placeholder="As it appeared at birth" /></Field>
     <div className="form-row">
       <Field label="Date of birth" icon={CalendarDays}><input name="birthDate" type="date" value={birthDate} onChange={(event) => setBirthDate(event.target.value)} required /></Field>
-      <Field label="Time of birth" icon={Clock3}><input name="birthTime" type="time" value={birthTime} onChange={(event) => setBirthTime(event.target.value)} required /></Field>
+      <Field label="Time of birth" icon={Clock3}><input name="birthTime" type="time" value={birthTime} onChange={(event) => setBirthTime(event.target.value)} required={!birthTimeUnknown} disabled={birthTimeUnknown} /></Field>
     </div>
+    <label className="unknown-time-option"><input type="checkbox" checked={birthTimeUnknown} onChange={(event) => setBirthTimeUnknown(event.target.checked)} />I don’t know my birth time</label>
+    {birthTimeUnknown && <p className="location-message">We use local noon as an approximate snapshot and sample the day for sign changes. Rising sign, houses, and time-dependent readings are omitted. The Moon and boundary signs may be uncertain.</p>}
     <Field label="Birthplace" icon={MapPin}><input name="location" defaultValue={initial.location} placeholder="City, country" /></Field>
     <button className="location-lookup" type="button" onClick={handleLocationLookup} disabled={lookupBusy}>
       {lookupBusy ? <LoaderCircle size={14} className="spin" /> : <Search size={14} />}
@@ -176,7 +182,7 @@ export default function BirthForm({ onSubmit, busy }) {
     {timezoneError && <p className="location-message location-error" role="alert">{timezoneError}</p>}
     <div className="chart-options">
       <Field label="Zodiac system"><select name="zodiacMode" defaultValue="tropical"><option value="tropical">Tropical</option><option value="sidereal">Sidereal (Lahiri)</option></select></Field>
-      <Field label="House system"><select name="houseSystem" defaultValue="whole-sign"><option value="whole-sign">Whole Sign</option><option value="equal">Equal</option><option value="porphyry">Porphyry</option></select></Field>
+      <Field label="House system"><select name="houseSystem" defaultValue="whole-sign" disabled={birthTimeUnknown}><option value="whole-sign">Whole Sign</option><option value="equal">Equal</option><option value="porphyry">Porphyry</option></select></Field>
     </div>
     <button className="submit-button" type="submit" disabled={busy}>{busy ? <><LoaderCircle size={17} className="spin" />Calculating your chart…</> : <>Reveal my chart <span>→</span></>}</button>
     <p className="privacy-note">Only your birthplace search is sent to OpenStreetMap Nominatim. Time-zone lookup is offline; your birth details and numerology name stay in this browser.</p>

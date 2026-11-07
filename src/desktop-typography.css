@@ -1,0 +1,50 @@
+@media (min-width: 641px) {
+  .app-shell p:not(.hero-lede):not(.form-intro > p):not(.empty-preview p) {
+    font-size: 11px;
+    line-height: 1.65;
+  }
+
+  .app-shell :is(.eyebrow, .hero-eyebrow, .art-caption, .form-step,
+    .field-label, .field-hint, .unknown-time-option, .wheel-topline, .chart-badge,
+    .wheel-caption, .chart-footnote, .big-three-title, .big-three-label,
+    .big-three-degree, .big-three-info > span:last-child, .reading-kicker,
+    .chart-meta, .chart-meta span, .placement-caption, .placement-table-head,
+    .placement-theme, .element-chip, .sign-card-date, .sign-card-footer,
+    .house-planets > span, .formula-number, .element-keywords,
+    .element-detail > span:last-child, .at-glance-sign > span,
+    .at-glance-balance > strong span, .quality-row, .selected-aspects,
+    .element-insight, .aspect-orb, .glossary-angle, .glossary-style,
+    .transit-date, .transit-days, .transit-body-list,
+    .transit-subheading > span:last-child, .personality-house,
+    .personality-context, .big-three-narrative-title span:last-child,
+    .numerology-card-label, .numerology-everyday, .numerology-prompt,
+    .site-footer > div > span) {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .app-shell :is(.aspect-item strong, .sign-card-footer strong,
+    .at-glance-sign strong, .at-glance-balance > strong,
+    .personality-pattern strong, .personality-guidance strong,
+    .big-three-trait strong, .transit-contact-copy strong,
+    .numerology-everyday strong, .numerology-prompt strong) {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .app-shell :is(.personality-overview-copy ul, .personality-life-card ul,
+    .numerology-everyday-guide ol) {
+    font-size: 11px;
+    line-height: 1.65;
+  }
+
+  .quality-row {
+    grid-template-columns: 58px minmax(20px, 1fr) 14px;
+  }
+
+  .wheel-topline,
+  .chart-meta,
+  .reading-formula {
+    flex-wrap: wrap;
+  }
+}

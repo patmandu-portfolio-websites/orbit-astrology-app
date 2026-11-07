@@ -1,5 +1,6 @@
 import * as Astronomy from 'astronomy-engine';
 import { signs, planets } from '../data/astrology.js';
+import { offsetForLocalDateTime } from './timezone.js';
 
 const wrap = (n) => ((n % 360) + 360) % 360;
 const radians = (degrees) => degrees * Math.PI / 180;
@@ -197,4 +198,25 @@ export function calculateAspects(placements) {
     }
   }
   return found.sort((left, right) => left.orb - right.orb);
+}
+
+export function calculateDateOnlyChart(values) {
+  const times = [...Array.from({ length: 24 }, (_, hour) => `${String(hour).padStart(2, '0')}:00`), '23:59'];
+  const samples = times.map((birthTime) => calculateChart({
+    ...values,
+    birthTime,
+    timezoneOffset: values.timezoneId
+      ? offsetForLocalDateTime(values.timezoneId, values.birthDate, birthTime)
+      : values.timezoneOffset,
+  }));
+  const noon = samples[12];
+  return {
+    birthTimeUnknown: true,
+    date: noon.date,
+    zodiacMode: noon.zodiacMode,
+    placements: noon.placements.map(({ house, ...placement }, index) => ({
+      ...placement,
+      sampledSigns: [...new Set(samples.map((sample) => sample.placements[index].sign.name))],
+    })),
+  };
 }
