@@ -8,6 +8,8 @@ import TransitReadings from './TransitReadings.jsx';
 import PersonalityProfile from './PersonalityProfile.jsx';
 import './TransitReadings.css';
 import InfoTip from './InfoTip.jsx';
+import ModalityText from './ModalityText.jsx';
+import { modalities } from '../data/modalities.js';
 import { planets, signs, houses } from '../data/astrology.js';
 
 function ordinal(number) {
@@ -30,7 +32,7 @@ export function ChartSummary({ chart, personName }) {
   const zodiacLabel = chart.zodiacMode === 'sidereal' ? 'Sidereal · Lahiri' : 'Tropical';
   const houseLabel = { 'whole-sign': 'Whole Sign', equal: 'Equal', porphyry: 'Porphyry' }[chart.houseSystem];
   const planetMeanings = Object.fromEntries(planets.map((planet) => [planet.name, planet.text]));
-  const signMeanings = Object.fromEntries(signs.map((sign) => [sign.name, `${sign.name} is a ${sign.mode.toLowerCase()} ${sign.element.toLowerCase()} sign, associated with ${sign.ruler}. Its calendar dates are only an approximate tropical Sun-sign guide; placements use the calculated position at birth.`]));
+  const signMeanings = Object.fromEntries(signs.map((sign) => [sign.name, `${sign.name} is a ${sign.mode.toLowerCase()} ${sign.element.toLowerCase()} sign, associated with ${sign.ruler}. ${sign.mode}: ${modalities[sign.mode].short} Its calendar dates are only an approximate tropical Sun-sign guide; placements use the calculated position at birth.`]));
   const sun = chart.placements.find((placement) => placement.name === 'Sun');
   const sunNearBoundary = sun && (sun.degree < 1 || sun.degree >= 29);
 
@@ -68,7 +70,7 @@ export function ChartSummary({ chart, personName }) {
             <div className="at-glance-big-three">
               {interpretation.bigThree.map((item) => <div className="at-glance-sign" key={item.label}>
                 <strong>{item.label} · {item.sign}</strong>
-                <span>{item.description}</span>
+                <span><ModalityText>{item.description}</ModalityText></span>
               </div>)}
             </div>
             <div className="at-glance-balances">
@@ -81,13 +83,13 @@ export function ChartSummary({ chart, personName }) {
               <div className="at-glance-balance">
                 <strong>Styles <span>How energy moves</span></strong>
                 {interpretation.modes.map((item) => <div className="quality-row" key={item.name}>
-                  <span>{item.name}</span><span className="quality-bar"><i style={{ width: `${item.count * 10}%` }} /></span><span>{item.count}</span>
+                  <span><ModalityText>{item.name}</ModalityText></span><span className="quality-bar"><i style={{ width: `${item.count * 10}%` }} /></span><span>{item.count}</span>
                 </div>)}
               </div>
             </div>
             <div className="at-glance-definitions">
               <p><strong>Elements:</strong> Fire brings energy and initiative; Earth grounds ideas in practical steps; Air emphasizes ideas and communication; Water centers feeling and intuition.</p>
-              <p><strong>Styles (modalities):</strong> Cardinal starts, Fixed sustains, and Mutable adapts. These describe different ways a sign may approach change and action.</p>
+              <p><strong>Styles (modalities):</strong> <ModalityText>Cardinal starts, Fixed sustains, and Mutable adapts.</ModalityText> These describe different ways a sign may approach change and action.</p>
               <small>Counts show how the ten planets are distributed across these sign groups. Every chart contains all four elements and all three styles; a lower count does not mean an area is missing.</small>
             </div>
           </div>
@@ -97,7 +99,7 @@ export function ChartSummary({ chart, personName }) {
     </div>
     <section className="personal-reading" aria-labelledby="personal-reading-title">
       <div><span className="eyebrow">A beginner-friendly reading</span><h3 id="personal-reading-title">How your placements work together</h3></div>
-      <div className="personal-reading-copy">{interpretation.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      <div className="personal-reading-copy">{interpretation.paragraphs.map((paragraph) => <p key={paragraph}><ModalityText>{paragraph}</ModalityText></p>)}
         <h4>One chart, different sides of experience</h4>
         {interpretation.synthesis.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         <p>Being near a sign boundary does not assign a planet to two signs in this chart. Other signs contribute through their own planetary placements and house cusps—not because a nearby sign automatically blends into your Sun sign.</p>
@@ -105,7 +107,7 @@ export function ChartSummary({ chart, personName }) {
           {interpretation.placementStyles.map((style) => <article className="placement-style-card" key={style.name}>
             <h4>{style.name} in {style.sign}</h4>
             <strong>{style.theme}</strong>
-            <p>{style.description}</p>
+            <p><ModalityText>{style.description}</ModalityText></p>
             <small>{style.context}</small>
           </article>)}
         </div>

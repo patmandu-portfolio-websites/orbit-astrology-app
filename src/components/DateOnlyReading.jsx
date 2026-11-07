@@ -1,5 +1,5 @@
 import SectionHeading from './SectionHeading.jsx';
-import { signVoices } from '../lib/personality.js';
+import { signVoices, relatingReflection } from '../lib/personality.js';
 import './ChartSummary.css';
 
 export default function DateOnlyReading({ chart }) {
@@ -15,6 +15,7 @@ export default function DateOnlyReading({ chart }) {
         {placement.sampledSigns.length > 1
           ? <p>Time-sensitive: more than one sign appears in this day’s samples. Neither sign can be confirmed without a birth time.</p>
           : <p>At the sampled times, {placement.sign.name} adds {signVoices[placement.sign.name].qualities}.</p>}
+        {placement.sampledSigns.length === 1 && relatingReflection(placement) && <p><strong>A tentative relationship reflection:</strong> {relatingReflection(placement)} This uses sampled sign positions, not an exact birth time.</p>}
       </article>)}
     </div>
   </section>;

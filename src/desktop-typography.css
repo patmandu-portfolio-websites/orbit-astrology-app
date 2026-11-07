@@ -39,7 +39,7 @@
   }
 
   .quality-row {
-    grid-template-columns: 58px minmax(20px, 1fr) 14px;
+    grid-template-columns: 80px minmax(20px, 1fr) 14px;
   }
 
   .wheel-topline,

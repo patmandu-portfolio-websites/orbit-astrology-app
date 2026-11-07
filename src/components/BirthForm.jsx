@@ -22,7 +22,7 @@ function Field({ label, icon: Icon, children, hint }) {
   return <label className="field"><span className="field-label">{Icon && <Icon size={14} />}{label}</span>{children}{hint && <span className="field-hint">{hint}</span>}</label>;
 }
 
-export default function BirthForm({ onSubmit, busy }) {
+export default function BirthForm({ onSubmit, busy, zodiacMode }) {
   const [latitude, setLatitude] = useState(initial.latitude);
   const [longitude, setLongitude] = useState(initial.longitude);
   const [birthDate, setBirthDate] = useState(initial.birthDate);
@@ -181,7 +181,7 @@ export default function BirthForm({ onSubmit, busy }) {
     </Field>
     {timezoneError && <p className="location-message location-error" role="alert">{timezoneError}</p>}
     <div className="chart-options">
-      <Field label="Zodiac system"><select name="zodiacMode" defaultValue="tropical"><option value="tropical">Tropical</option><option value="sidereal">Sidereal (Lahiri)</option></select></Field>
+      <Field label="Zodiac system"><select name="zodiacMode" defaultValue={zodiacMode || 'tropical'} disabled={Boolean(zodiacMode)}><option value="tropical">Tropical</option><option value="sidereal">Sidereal (Lahiri)</option></select></Field>
       <Field label="House system"><select name="houseSystem" defaultValue="whole-sign" disabled={birthTimeUnknown}><option value="whole-sign">Whole Sign</option><option value="equal">Equal</option><option value="porphyry">Porphyry</option></select></Field>
     </div>
     <button className="submit-button" type="submit" disabled={busy}>{busy ? <><LoaderCircle size={17} className="spin" />Calculating your chart…</> : <>Reveal my chart <span>→</span></>}</button>

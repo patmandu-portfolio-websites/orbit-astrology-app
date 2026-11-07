@@ -1,5 +1,7 @@
 import SectionHeading from './SectionHeading.jsx';
 import InfoTip from './InfoTip.jsx';
+import { modalities } from '../data/modalities.js';
+import ModalityText from './ModalityText.jsx';
 import './AspectGlossary.css';
 
 const terms = [
@@ -62,6 +64,17 @@ export default function AspectGlossary() {
         <p>{term.description}</p>
       </article>)}
     </div>
+    <section className="modality-glossary" aria-labelledby="modality-glossary-title">
+      <h3 id="modality-glossary-title"><ModalityText>Cardinal, Fixed & Mutable</ModalityText>: the three modalities</h3>
+      <p>A modality describes how a sign symbolically approaches action and change. Elements describe the kind of energy; modalities describe how it moves. Every chart contains all three styles—none is better than another, and they are not rigid personality labels.</p>
+      <div className="modality-glossary-grid">
+        {Object.entries(modalities).map(([name, term]) => <article className="glossary-card" key={name}>
+          <h4><ModalityText>{name}</ModalityText></h4>
+          <p>{term.description}</p>
+          <p><strong>Signs:</strong> {term.signs}</p>
+        </article>)}
+      </div>
+    </section>
     <p className="glossary-note">These are traditional astrological meanings offered as reflection prompts, not scientific findings or fixed outcomes.</p>
   </section>;
 }

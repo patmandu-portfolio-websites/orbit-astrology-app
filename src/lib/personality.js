@@ -201,6 +201,19 @@ export function bigThreeReading(chart) {
   };
 }
 
+export function relatingReflection(placement) {
+  const character = signVoices[placement.sign.name];
+  const reflections = {
+    Sun: `In groups or friendships, your ${placement.sign.name} Sun offers ${character.strengths} as possible contributions. Notice when you feel free to be yourself, and invite others to express their own priorities too.`,
+    Moon: `Your ${placement.sign.name} Moon points toward ${character.needs} as possible emotional needs. Try explaining what support looks like for you, while asking whether the other person wants listening, reassurance, or practical help.`,
+    Ascendant: `${placement.sign.name} Rising may bring ${character.qualities} to first meetings. First impressions are only a starting point: give yourself and others time to show more than an initial style.`,
+    Mercury: `${placement.sign.name} Mercury suggests ${character.collaboration} as useful conditions for exchanging ideas. Check what someone understood and allow a different communication pace, especially when a conversation matters.`,
+    Venus: `${placement.sign.name} Venus offers ${character.needs} as connection themes in friendship as well as partnership. Share what makes you feel appreciated, and ask how the other person prefers to give and receive care.`,
+    Mars: `${placement.sign.name} Mars adds ${character.qualities} to taking action with others. A useful balancing practice is ${character.stretch}. Agree on a pace, name boundaries respectfully, and pause if a disagreement becomes unproductive.`,
+  };
+  return reflections[placement.name] || null;
+}
+
 export function personalityProfile(chart) {
   const keyPlacements = ['Sun', 'Moon', 'Ascendant', 'Mercury', 'Venus', 'Mars']
     .map((name) => findPlacement(chart, name))
@@ -217,6 +230,7 @@ export function personalityProfile(chart) {
       description: `${placement.sign.name} brings ${character.qualities.toLowerCase()} to this part of your chart. In the ${house.title.toLowerCase()} area of life, this influence may be especially noticeable.`,
       strengths: character.strengths,
       stretch: character.stretch,
+      relating: relatingReflection(placement),
       signQuality: character.qualities,
       houseTitle: house.title,
       houseNumber: ordinal(placement.house),
@@ -255,6 +269,7 @@ export function lifeAreaReadings(chart) {
   const moon = placements.Moon;
   const saturn = placements.Saturn;
   const jupiter = placements.Jupiter;
+  const mercury = placements.Mercury;
   const partnershipSign = signAt(chart.houseCusps[6]);
   const careerSign = signAt(chart.houseCusps[9]);
   const partnershipVoice = signVoices[partnershipSign.name];
@@ -270,6 +285,12 @@ export function lifeAreaReadings(chart) {
         `Energy and boundaries: Mars in ${mars.sign.name}`,
         `Emotional comfort: Moon in ${moon.sign.name}`,
       ],
+      relating: [
+        { title: 'Communicating with care', text: `Mercury in ${mercury.sign.name} suggests ${signVoices[mercury.sign.name].collaboration} as helpful conditions for conversation. You might try stating your intention, asking a genuine question, and checking understanding rather than expecting others to read between the lines.` },
+        { title: 'Support, closeness & boundaries', text: `Your ${moon.sign.name} Moon points to ${signVoices[moon.sign.name].needs}, while ${venus.sign.name} Venus adds ${signVoices[venus.sign.name].needs} to connection. These needs can coexist. Discuss what feels supportive and how much space each person wants; caring does not require identical preferences.` },
+        { title: 'Friendship & belonging', text: `The ${signAt(chart.houseCusps[10]).name} sign on your eleventh-house cusp offers ${signVoices[signAt(chart.houseCusps[10]).name].qualities} as a lens on friendship and groups. Notice which communities welcome your contribution while allowing you to be yourself. This is not a prescription for which people to befriend.` },
+        { title: 'Navigating differences', text: `Mars in ${mars.sign.name} brings ${signVoices[mars.sign.name].qualities} to pursuing aims. Consider ${signVoices[mars.sign.name].stretch} when another person approaches things differently. A practical check-in is: “What do we each need, and what agreement is realistic for both of us?”` },
+      ],
     },
     career: {
       sign: careerSign,
@@ -279,6 +300,9 @@ export function lifeAreaReadings(chart) {
         `Public direction: ${careerSign.name} on the tenth-house cusp`,
         `Practice and responsibility: Saturn in ${saturn.sign.name}`,
         `Growth and perspective: Jupiter in ${jupiter.sign.name}`,
+      ],
+      relating: [
+        { title: 'Working alongside others', text: `Your ${careerSign.name} public-role style suggests ${careerVoice.collaboration}. Saturn in ${saturn.sign.name} adds ${signVoices[saturn.sign.name].qualities} to responsibility. Try agreeing on roles, deadlines, and how feedback will be shared rather than assuming everyone works in the same way.` },
       ],
     },
   };

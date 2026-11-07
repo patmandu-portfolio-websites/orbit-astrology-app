@@ -5,6 +5,40 @@
   background: #f4f3ed;
 }
 
+.modality-glossary {
+  margin-top: 24px;
+}
+
+.modality-glossary > h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.modality-glossary > p {
+  color: #6d7169;
+  line-height: 1.65;
+}
+
+.modality-glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.modality-glossary h4 {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+@media (max-width: 640px) {
+  .modality-glossary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .aspect-glossary .section-heading {
   margin-bottom: 16px;
 }

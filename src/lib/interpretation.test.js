@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { calculateChart } from './chart.js';
 import { interpretChart } from './interpretation.js';
+import { lifeAreaReadings, personalityProfile } from './personality.js';
 
 test('expanded reading covers all ten planets and uses the selected chart settings', () => {
   for (const zodiacMode of ['tropical', 'sidereal']) {
@@ -29,6 +30,11 @@ test('expanded reading covers all ten planets and uses the selected chart settin
       assert.ok(reading.synthesis[1].includes('Mercury'));
       assert.ok(reading.synthesis[1].includes('Venus'));
       assert.ok(reading.synthesis[1].includes('Mars'));
+      assert.ok(personalityProfile(chart).every((placement) => placement.relating.includes(placement.sign.name)));
+      const lifeAreas = lifeAreaReadings(chart);
+      assert.equal(lifeAreas.relationships.relating.length, 4);
+      assert.equal(lifeAreas.career.relating.length, 1);
+      assert.ok(Object.values(lifeAreas).every((area) => area.relating.every((item) => item.text && !item.text.includes('undefined'))));
     }
   }
 });

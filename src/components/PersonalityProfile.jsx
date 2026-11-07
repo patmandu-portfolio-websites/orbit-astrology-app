@@ -1,4 +1,5 @@
 import SectionHeading from './SectionHeading.jsx';
+import ModalityText from './ModalityText.jsx';
 import { bigThreeReading, lifeAreaReadings, overallPersonality, personalityProfile } from '../lib/personality.js';
 import './PersonalityProfile.css';
 
@@ -17,7 +18,7 @@ export default function PersonalityProfile({ chart }) {
       <header className="big-three-reading-heading">
         <span className="eyebrow">The Big Three</span>
         <h3 id="big-three-reading-title">{bigThree.headline}</h3>
-        <p>{bigThree.combination}</p>
+        <p><ModalityText>{bigThree.combination}</ModalityText></p>
       </header>
       <p className="big-three-synthesis">{bigThree.synthesis}</p>
       <div className="big-three-narratives">
@@ -47,7 +48,7 @@ export default function PersonalityProfile({ chart }) {
         <ul>{overall.threeThemes.map((theme) => <li key={theme}>{theme}</li>)}</ul>
         <div className="personality-pattern">
           <strong>Your chart’s elemental rhythm</strong>
-          <p>{overall.pattern.description}</p>
+          <p><ModalityText>{overall.pattern.description}</ModalityText></p>
         </div>
         <small>{overall.note}</small>
       </div>
@@ -61,6 +62,9 @@ export default function PersonalityProfile({ chart }) {
         <div>
           <p>{reading.description}</p>
           <ul>{reading.themes.map((theme) => <li key={theme}>{theme}</li>)}</ul>
+          {reading.relating.map((reflection) => <div className="personality-guidance" key={reflection.title}>
+            <p><strong>{reflection.title}</strong>{reflection.text}</p>
+          </div>)}
         </div>
       </article>)}
     </div>
@@ -81,8 +85,9 @@ export default function PersonalityProfile({ chart }) {
         <div className="personality-guidance">
           <p><strong>Helpful qualities</strong>{placement.strengths}</p>
           <p><strong>A gentle growth edge</strong>{placement.stretch}</p>
+          <p><strong>Relating to other people</strong>{placement.relating}</p>
         </div>
-        <span className="personality-context">{placement.sign.element} · {placement.sign.mode} · {placement.houseTitle}</span>
+        <span className="personality-context">{placement.sign.element} · <ModalityText>{placement.sign.mode}</ModalityText> · {placement.houseTitle}</span>
       </article>)}
     </div>
     <p className="personality-note">Sign descriptions are broad archetypes, not fixed labels or scientific assessments. Your chart is one interpretive lens; your experiences and choices are your own.</p>

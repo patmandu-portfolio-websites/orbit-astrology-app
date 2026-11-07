@@ -1,0 +1,78 @@
+.compatibility-screen {
+  padding: 40px 8%;
+}
+
+.compatibility-screen h1 {
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+.compatibility-screen > p,
+.comparison-results p {
+  color: #646860;
+  line-height: 1.65;
+}
+
+.comparison-back {
+  margin-bottom: 22px;
+  padding: 10px 14px;
+  border: 1px solid #c9cfbf;
+  background: #faf9f5;
+  color: var(--green);
+  cursor: pointer;
+}
+
+.comparison-form-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  margin: 28px 0;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.comparison-card {
+  padding: 18px;
+  border: 1px solid #dddccf;
+  border-top: 2px solid #c7b68f;
+  border-radius: 8px;
+  background: #faf9f5;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.comparison-card h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.comparison-prompt {
+  padding: 10px;
+  background: #eceedf;
+}
+
+.comparison-aspects,
+.comparison-numerology {
+  margin-top: 32px;
+}
+
+.compare-launch {
+  max-width: 300px;
+  margin: 24px auto 36px;
+}
+
+@media (max-width: 760px) {
+  .comparison-form-layout,
+  .comparison-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .compatibility-screen {
+    padding: 26px 20px;
+  }
+}

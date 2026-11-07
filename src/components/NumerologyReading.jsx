@@ -1,5 +1,6 @@
 import { Sparkles } from 'lucide-react';
 import SectionHeading from './SectionHeading.jsx';
+import ModalityText from './ModalityText.jsx';
 import { calculateNumerology, guidanceForNumber } from '../lib/numerology.js';
 import './NumerologyReading.css';
 
@@ -19,8 +20,8 @@ function NumberCard({ label, number, detail }) {
 function astrologyLink(numberLabel, number, placement, connection) {
   return <article className="numerology-bridge-card" key={numberLabel}>
     <span className="numerology-card-label">{numberLabel} {number} + {placement.name} in {placement.sign.name}</span>
-    <p>{connection(placement.sign, guidanceForNumber(number))}</p>
-    <small>{placement.sign.element} · {placement.sign.mode}</small>
+    <p><ModalityText>{connection(placement.sign, guidanceForNumber(number))}</ModalityText></p>
+    <small>{placement.sign.element} · <ModalityText>{placement.sign.mode}</ModalityText></small>
   </article>;
 }
 

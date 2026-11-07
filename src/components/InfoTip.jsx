@@ -41,8 +41,8 @@ export default function InfoTip({ label, children }) {
     >
       <Info size={13} aria-hidden="true" />
     </button>
-    <div className="info-tip-content" id={id} role="dialog" aria-labelledby={`${id}-label`} hidden={!open}>
-      <div className="info-tip-heading">
+    <span className="info-tip-content" id={id} role="dialog" aria-labelledby={`${id}-label`} hidden={!open}>
+      <span className="info-tip-heading">
         <strong id={`${id}-label`}>{label}</strong>
         <button
           className="info-tip-close"
@@ -55,8 +55,8 @@ export default function InfoTip({ label, children }) {
         >
           <X size={13} aria-hidden="true" />
         </button>
-      </div>
+      </span>
       <span>{children}</span>
-    </div>
+    </span>
   </span>;
 }
