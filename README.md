@@ -2,6 +2,8 @@
 
 A responsive React app for exploring a natal chart. Enter a birth date and local time, UTC offset, and latitude/longitude to calculate Sun, Moon, planets, Ascendant, Midheaven, and whole-sign houses. The page includes a chart wheel, planetary placement table, zodiac guide, house guide, and a plain-language introduction to chart symbols.
 
+The visual design combines a warm reading surface with night-sky accents, decorative constellation lines, a moon-phase divider, and celestial section motifs. These illustrations are decorative, not a representation of the current sky or lunar phase; responsive text sizes and chart interactions are preserved.
+
 ## Run locally
 
 ```sh
@@ -20,6 +22,8 @@ Planetary positions are calculated in the browser with [Astronomy Engine](https:
 Sun signs use the calculated solar longitude, not fixed calendar cutoffs. The zodiac guide's dates are approximate tropical ranges: exact transitions vary by year, time, and time zone, and sidereal boundaries differ. For example, December 22, 1954 at 14:32 in Auckland (UTC+12) has a Sagittarius Sun; the December solstice/Capricorn ingress occurred around 21:24 local time that day. Charts with the Sun within one degree of a sign boundary show an explanatory note.
 
 The "How your placements work together" reading explains each of the ten planets' sign styles, elements, modalities, and house contexts, plus a chart-specific synthesis and a personal-planet aspect example when available. Near a boundary, a planet is assigned to one calculated sign, not a blended cusp sign; the chart's other signs contribute through their own placements.
+
+Daily and weekly "Life areas in focus" cards include plain-language house explanations, everyday examples, reflection questions, and the themes of the planets responsible for the emphasis. Daily focus ranks houses by current planet count; weekly focus ranks by occupied daily samples, then unique planet count. These rankings are not measures of life importance or predictions of events.
 
 Use **Find coordinates** to look up a birthplace with [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/). This is an explicit, one-off search (not autocomplete); only the place name is sent to the service, and the returned coordinates remain editable. The public Nominatim server is intended for moderate, user-initiated usage, allows at most one request per second per application, and requires attribution. See its [usage policy](https://operations.osmfoundation.org/policies/nominatim/). For a larger public deployment, use a geocoding provider or proxy with application-wide rate limiting and caching.
 

@@ -1,6 +1,6 @@
 @media (min-width: 641px) {
-  .app-shell p:not(.hero-lede):not(.form-intro > p):not(.empty-preview p) {
-    font-size: 11px;
+  .app-shell :is(p, li) {
+    font-size: 12px;
     line-height: 1.65;
   }
 

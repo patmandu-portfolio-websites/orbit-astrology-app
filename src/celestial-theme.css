@@ -1,0 +1,180 @@
+:root {
+  --celestial-night: #223b3c;
+  --celestial-gold: #b28a50;
+}
+
+.hero-section {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  background: radial-gradient(ellipse at 80% 30%, #e7e9df, transparent 65%), #f8f7f3;
+}
+
+.hero-art {
+  height: 410px;
+  border: 1px solid #72827a;
+  border-radius: 48% 48% 8px 8px / 42% 42% 8px 8px;
+  box-shadow: 0 20px 50px #223b3c20;
+}
+
+.art-wash {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%23d4bb87' stroke-opacity='.35'%3E%3Cpath d='M50 95 110 65 145 115 210 80M265 250 305 290 350 265 370 325M35 280 85 250 120 300'/%3E%3C/g%3E%3Cg fill='%23e6d6ad'%3E%3Ccircle cx='50' cy='95' r='2'/%3E%3Ccircle cx='110' cy='65' r='3'/%3E%3Ccircle cx='145' cy='115' r='2'/%3E%3Ccircle cx='210' cy='80' r='2'/%3E%3Ccircle cx='265' cy='250' r='2'/%3E%3Ccircle cx='305' cy='290' r='3'/%3E%3Ccircle cx='350' cy='265' r='2'/%3E%3Ccircle cx='370' cy='325' r='2'/%3E%3Ccircle cx='35' cy='280' r='2'/%3E%3Ccircle cx='85' cy='250' r='2'/%3E%3Ccircle cx='120' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 50%, #42615a, #223b3c 75%);
+}
+
+.art-sun {
+  background: radial-gradient(circle at 35% 30%, #f1d8a9, #c7995b);
+  box-shadow: 0 0 0 12px #d8b68c15, 0 0 0 34px #d8b68c0c, 0 0 60px #d3b07540;
+}
+
+.art-orbit {
+  border-color: #d1b87a55;
+}
+
+.art-star,
+.art-zodiac {
+  color: #ead8ae;
+}
+
+.art-zodiac {
+  font-family: Georgia, 'Segoe UI Symbol', serif;
+  font-variant-emoji: text;
+}
+
+.art-caption {
+  color: #d4dcca;
+}
+
+.hero-art::after {
+  position: absolute;
+  top: 14%;
+  right: 18%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: -8px 3px 0 0 #e5d3a9;
+  content: '';
+}
+
+.celestial-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 11%;
+  background: var(--celestial-night);
+  color: #dfc699;
+}
+
+.celestial-ribbon-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.moon-phase-strip {
+  width: 270px;
+  max-width: 100%;
+  height: 32px;
+  flex: 0 1 270px;
+}
+
+.section-celestial-mark {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--celestial-gold);
+  font-family: Georgia, serif;
+  font-size: 21px;
+  letter-spacing: 6px;
+}
+
+.section-heading {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d9dbcf;
+}
+
+.form-section {
+  background: #eceedf;
+}
+
+.birth-form,
+.wheel-card {
+  border-radius: 12px;
+  border-color: #d8dccf;
+  box-shadow: 0 8px 30px #223b3c09;
+}
+
+.sign-card,
+.house-card,
+.transit-focus-card,
+.personality-card,
+.numerology-card,
+.placement-style-card,
+.glossary-card {
+  border-radius: 8px;
+  border-top: 2px solid #c7b68f;
+}
+
+.sign-card-symbol,
+.house-index {
+  font-size: 28px;
+}
+
+.numerology-section {
+  border-top: 3px solid var(--celestial-gold);
+}
+
+.transit-section,
+.personality-section,
+.numerology-section,
+.personal-reading {
+  border-radius: 12px;
+}
+
+.closing-banner {
+  background: var(--celestial-night);
+  color: #f2ecd9;
+}
+
+.closing-banner h2 em,
+.closing-banner .eyebrow,
+.closing-decoration {
+  color: #dfc699;
+}
+
+.closing-banner p {
+  color: #d0dacd;
+}
+
+.closing-banner .submit-button {
+  background: #e2cca3;
+  color: #223b3c;
+}
+
+.closing-banner .submit-button:hover {
+  background: #f0ddba;
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding-top: 25px;
+    padding-bottom: 35px;
+  }
+
+  .hero-art {
+    height: 300px;
+  }
+
+  .celestial-ribbon {
+    flex-direction: column;
+    gap: 12px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+
+  .moon-phase-strip {
+    flex: none;
+  }
+}

@@ -136,6 +136,37 @@
   line-height: 1.5;
 }
 
+.transit-focus-guidance,
+.transit-focus-themes {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #e7e4dc;
+}
+
+.transit-focus-guidance strong,
+.transit-focus-themes strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #536453;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.transit-focus-themes ul {
+  margin: 0;
+  padding-left: 16px;
+  color: #747770;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .transit-focus-guidance strong,
+  .transit-focus-themes strong {
+    font-size: 14px;
+  }
+}
+
 .transit-contact-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

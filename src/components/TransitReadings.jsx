@@ -14,7 +14,20 @@ function FocusCard({ focus, weekly }) {
     </div>
     <h4>{focus.title}</h4>
     <p>{focus.description}</p>
-    <span className="transit-body-list">{focus.planets.join(' · ')}</span>
+    <p>{focus.explanation}</p>
+    <div className="transit-focus-guidance">
+      <strong>In everyday life</strong>
+      <p>{focus.everyday}</p>
+      <strong>A gentle check-in</strong>
+      <p>{focus.prompt}</p>
+    </div>
+    <div className="transit-focus-themes">
+      <strong>Why it appears here</strong>
+      <p>{weekly
+        ? `At least one planet was in this house in ${focus.sampleCount} of the 7 daily samples. The planets below were present at some point in those samples, not necessarily all together.`
+        : 'These planets are currently passing through this area of your birth chart. Their traditional themes offer different angles to reflect on:'}</p>
+      <ul>{focus.planetaryThemes.map((theme) => <li key={theme}>{theme}</li>)}</ul>
+    </div>
   </article>;
 }
 
@@ -68,6 +81,7 @@ export default function TransitReadings({ chart }) {
         : 'A snapshot of the sky right now. Use these themes as prompts for reflection, not as instructions or predictions.'}</p>
     </div>
     <div className="transit-subheading"><span className="eyebrow">Life areas in focus</span><span>{weekly ? 'Most emphasized over the week' : 'Based on today’s transits through your houses'}</span></div>
+    <p className="transit-focus-intro">Think of a house as a life topic, and a transit as a planet’s current position passing through that topic in your birth chart. These are up to three areas highlighted by the calculation—not a ranking of what matters most in your life. More planets, or more sampled days, does not mean something important must happen. Use the examples as optional reflection ideas.</p>
     {focus.length
       ? <div className="transit-focus-grid">{focus.map((item) => <FocusCard key={item.number} focus={item} weekly={weekly} />)}</div>
       : <p className="transit-empty">No distinct house emphasis stood out in this reading.</p>}

@@ -6,5 +6,6 @@ import './card-body-type.css';
 import './closing-button.css';
 import './desktop-typography.css';
 import './mobile-typography.css';
+import './celestial-theme.css';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);

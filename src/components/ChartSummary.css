@@ -280,7 +280,7 @@
 
 .personal-reading {
   display: grid;
-  grid-template-columns: .8fr 1.2fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 30px;
   margin: 35px 0 0;
   padding: 24px 27px;
