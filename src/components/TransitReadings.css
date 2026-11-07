@@ -1,0 +1,300 @@
+.transit-section,
+.personality-section {
+  margin-top: 44px;
+  padding: 28px;
+  border: 1px solid #e6e3dc;
+  background: #f4f3ed;
+}
+
+.transit-section .section-heading,
+.personality-section .section-heading {
+  margin-bottom: 18px;
+}
+
+.transit-section .section-heading h2,
+.personality-section .section-heading h2 {
+  font-size: 30px;
+}
+
+.transit-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 18px 0 12px;
+}
+
+.transit-tabs {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid #e2e0d8;
+  background: #faf9f5;
+}
+
+.transit-tabs button {
+  padding: 8px 13px;
+  border: 0;
+  background: transparent;
+  color: #777a73;
+  font: inherit;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.transit-tabs button.active {
+  background: var(--green);
+  color: #fff;
+}
+
+.transit-date {
+  color: #777a73;
+  font-size: 9px;
+}
+
+.transit-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  background: #faf9f5;
+}
+
+.transit-spark {
+  color: #bd916a;
+}
+
+.transit-intro p {
+  margin: 0;
+  color: #747770;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.transit-subheading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 20px 0 10px;
+}
+
+.transit-subheading>span:last-child {
+  color: #8a8c84;
+  font-size: 8px;
+  text-align: right;
+}
+
+.transit-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.transit-focus-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #e7e4dc;
+  background: #faf9f5;
+}
+
+.transit-focus-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.transit-house-number {
+  color: #83917e;
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.transit-days {
+  color: #92938c;
+  font-size: 8px;
+}
+
+.transit-focus-card h4 {
+  margin: 7px 0 5px;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.transit-focus-card p {
+  margin: 0 0 10px;
+  color: #777a73;
+  font-size: 8px;
+  line-height: 1.55;
+}
+
+.transit-body-list {
+  color: #7d8b7b;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.transit-contact-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.transit-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e7e4dc;
+  background: #faf9f5;
+}
+
+.transit-contact-symbol {
+  color: var(--green);
+  font-size: 17px;
+}
+
+.transit-contact-copy {
+  min-width: 0;
+}
+
+.transit-contact-copy strong,
+.transit-contact-copy small {
+  display: block;
+}
+
+.transit-contact-copy strong {
+  font-size: 9px;
+}
+
+.transit-contact-copy small {
+  margin: 4px 0;
+  color: #909188;
+  font-size: 8px;
+}
+
+.transit-contact-copy p {
+  margin: 0;
+  color: #777a73;
+  font-size: 8px;
+  line-height: 1.55;
+}
+
+.transit-contact-heading {
+  margin-top: 23px;
+}
+
+.transit-empty {
+  margin: 0;
+  padding: 13px;
+  background: #faf9f5;
+  color: #777a73;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.transit-disclaimer,
+.personality-note {
+  margin: 15px 0 0;
+  color: #8b8d85;
+  font-size: 8px;
+  line-height: 1.6;
+}
+
+.personality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.personality-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #e7e4dc;
+  background: #faf9f5;
+}
+
+.personality-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.personality-symbol {
+  color: #788a78;
+  font-family: var(--serif);
+  font-size: 21px;
+}
+
+.personality-house {
+  color: #96978e;
+  font-size: 7px;
+  letter-spacing: 1px;
+}
+
+.personality-card .eyebrow {
+  font-size: 7px;
+  letter-spacing: 1.2px;
+}
+
+.personality-card h3 {
+  margin: 5px 0 7px;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.personality-card p {
+  margin: 0 0 11px;
+  color: #73766f;
+  font-size: 8px;
+  line-height: 1.65;
+}
+
+.personality-context {
+  color: #83917e;
+  font-size: 7px;
+}
+
+@media (max-width: 760px) {
+  .transit-section,
+  .personality-section {
+    padding: 19px;
+  }
+
+  .transit-focus-grid,
+  .personality-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .transit-section,
+  .personality-section {
+    padding: 15px;
+  }
+
+  .transit-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .transit-focus-grid,
+  .transit-contact-list,
+  .personality-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transit-subheading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .transit-subheading>span:last-child {
+    text-align: left;
+  }
+}

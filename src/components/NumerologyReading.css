@@ -1,0 +1,235 @@
+.numerology-section {
+  margin: 44px 0 0;
+  padding: 28px;
+  border: 1px solid #e6e3dc;
+  background: #f4f3ed;
+}
+
+.numerology-section .section-heading {
+  margin-bottom: 18px;
+}
+
+.numerology-section .section-heading h2 {
+  font-size: 30px;
+}
+
+.numerology-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 13px 15px;
+  background: #faf9f5;
+  color: #b38c68;
+}
+
+.numerology-intro p {
+  margin: 0;
+  color: #6d7169;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.numerology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 9px;
+}
+
+.numerology-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #e7e4dc;
+  background: #faf9f5;
+  display: flex;
+  flex-direction: column;
+}
+
+.numerology-card-label {
+  display: block;
+  color: #788a78;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.numerology-number {
+  display: block;
+  margin: 8px 0 5px;
+  color: var(--green);
+  font-family: var(--serif);
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.numerology-theme {
+  display: block;
+  margin: 0 0 7px;
+  color: #536453;
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.numerology-card > p {
+  margin: 0 0 12px;
+  color: #646860;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.numerology-everyday,
+.numerology-prompt {
+  display: grid;
+  gap: 3px;
+  margin-top: auto;
+  padding: 9px 10px;
+  background: #f0efe9;
+  color: #6d7169;
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.numerology-prompt {
+  margin-top: 6px;
+  background: #f5f2ea;
+}
+
+.numerology-everyday strong,
+.numerology-prompt strong {
+  color: #788a78;
+  font-size: 8px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.numerology-card small {
+  margin-top: 9px;
+  color: #92938c;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.numerology-name-note,
+.numerology-note {
+  color: #8b8d85;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.numerology-name-note {
+  margin: 12px 0 0;
+}
+
+.numerology-reflection {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  border-left: 2px solid #829482;
+  background: #faf9f5;
+  color: #6d7169;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.numerology-reflection strong {
+  color: #536453;
+}
+
+.numerology-bridge {
+  margin-top: 24px;
+  padding: 19px;
+  border: 1px solid #e7e4dc;
+  background: #faf9f5;
+}
+
+.numerology-bridge-heading h3 {
+  margin: 5px 0;
+  color: #353a34;
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.numerology-bridge-heading > p {
+  max-width: 760px;
+  margin: 0;
+  color: #747770;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.numerology-bridge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.numerology-bridge-card {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #e7e4dc;
+  background: #f4f3ed;
+}
+
+.numerology-bridge-card p {
+  margin: 8px 0;
+  color: #646860;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.numerology-bridge-card small {
+  color: #92938c;
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.numerology-everyday-guide {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-left: 2px solid #bd916a;
+  background: #faf9f5;
+}
+
+.numerology-everyday-guide > strong {
+  color: #536453;
+  font-size: 10px;
+}
+
+.numerology-everyday-guide ol {
+  display: grid;
+  gap: 5px;
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: #6d7169;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.numerology-note {
+  margin: 12px 0 0;
+}
+
+@media (max-width: 760px) {
+  .numerology-section {
+    padding: 19px;
+  }
+
+  .numerology-bridge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .numerology-section {
+    padding: 15px;
+  }
+
+  .numerology-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

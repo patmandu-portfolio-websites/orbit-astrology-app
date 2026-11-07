@@ -1,0 +1,119 @@
+.aspect-glossary {
+  margin-top: 40px;
+  padding: 24px;
+  border: 1px solid #e6e3dc;
+  background: #f4f3ed;
+}
+
+.aspect-glossary .section-heading {
+  margin-bottom: 16px;
+}
+
+.aspect-glossary .section-heading h2 {
+  font-size: 30px;
+}
+
+.glossary-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 13px 15px;
+  background: #faf9f5;
+}
+
+.glossary-intro-symbol {
+  color: #b38c68;
+}
+
+.glossary-intro p {
+  margin: 0;
+  color: #6d7169;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.aspect-glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.glossary-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #e7e4dc;
+  background: #faf9f5;
+}
+
+.glossary-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.glossary-symbol {
+  color: var(--green);
+  font-family: var(--serif);
+  font-size: 22px;
+}
+
+.glossary-angle {
+  color: #8d8e86;
+  font-size: 9px;
+}
+
+.glossary-card h3 {
+  margin: 8px 0 2px;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.glossary-style {
+  color: #788a78;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+
+.glossary-card p {
+  margin: 8px 0 0;
+  color: #747770;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.glossary-note {
+  margin: 13px 0 0;
+  color: #8b8d85;
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .aspect-glossary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .aspect-glossary {
+    padding: 17px;
+  }
+
+  .aspect-glossary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .glossary-card p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .aspect-glossary-grid {
+    grid-template-columns: 1fr;
+  }
+}

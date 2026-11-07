@@ -1,0 +1,59 @@
+.location-lookup {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: -4px 0 7px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.location-lookup:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.location-message {
+  margin: 0 0 8px;
+  color: #647563;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.location-message.location-error {
+  color: #985b4c;
+}
+
+.location-attribution {
+  margin: 6px 0 0;
+  color: #92938d;
+  font-size: 8px;
+  text-align: center;
+}
+
+.location-attribution a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.chart-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.chart-options .field {
+  min-width: 0;
+}
+
+@media (max-width: 420px) {
+  .chart-options {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

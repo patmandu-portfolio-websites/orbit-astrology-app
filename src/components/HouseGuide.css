@@ -1,0 +1,15 @@
+.house-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.house-sign {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.house-card .info-tip-content {
+  font-family: 'DM Sans', sans-serif;
+}

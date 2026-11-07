@@ -1,0 +1,13 @@
+.closing-banner .closing-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.closing-banner .closing-button span {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}

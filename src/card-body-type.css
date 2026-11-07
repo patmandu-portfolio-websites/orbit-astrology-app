@@ -1,0 +1,117 @@
+.sign-card p,
+.house-card p,
+.concept-card p,
+.big-three-info > span:last-child,
+.reading-card p,
+.selected-placement p,
+.personal-reading-copy p,
+.aspect-explanation p,
+.no-aspects,
+.transit-intro p,
+.transit-focus-card p,
+.transit-contact-copy p,
+.transit-empty,
+.personality-overview-copy > p,
+.personality-overview-copy ul,
+.personality-pattern p,
+.personality-life-card > div > p,
+.personality-life-card ul,
+.personality-card > p,
+.personality-guidance p {
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.element-explainer {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.element-explainer > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.element-detail {
+  gap: 7px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #e6e3dc;
+  border-left: 1px solid #e6e3dc;
+  background: #f2f1eb;
+}
+
+.element-detail .element-detail-dot {
+  width: 9px;
+  height: 9px;
+}
+
+.element-detail .element-keywords {
+  color: #788273;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.element-detail p {
+  margin: 0;
+  color: #6f726b;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.element-detail small {
+  margin-top: auto;
+  color: #888a82;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.personal-reading-copy p,
+.personality-overview-copy > p,
+.personality-life-card > div > p,
+.personality-card > p,
+.transit-contact-copy p {
+  font-size: 11px;
+}
+
+.personality-guidance strong,
+.personality-pattern strong,
+.transit-contact-copy small {
+  font-size: 9px;
+}
+
+@media (max-width: 640px) {
+  .sign-card p,
+  .house-card p,
+  .concept-card p,
+  .big-three-info > span:last-child,
+  .reading-card p,
+  .selected-placement p,
+  .personal-reading-copy p,
+  .aspect-explanation p,
+  .no-aspects,
+  .transit-intro p,
+  .transit-focus-card p,
+  .transit-contact-copy p,
+  .transit-empty,
+  .personality-overview-copy > p,
+  .personality-overview-copy ul,
+  .personality-pattern p,
+  .personality-life-card > div > p,
+  .personality-life-card ul,
+  .personality-card > p,
+  .personality-guidance p {
+    font-size: 10px;
+  }
+
+  .element-explainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .element-explainer > div:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .element-detail p {
+    font-size: 10px;
+  }
+}
