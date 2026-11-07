@@ -1,0 +1,148 @@
+@media (max-width: 640px) {
+  .app-shell main :is(p, li) {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .app-shell main :is(small, .field-hint, .privacy-note, .location-attribution,
+    .chart-footnote, .chart-meta, .selected-aspects, .at-glance-sign > span,
+    .at-glance-balance > strong span, .big-three-info > span:last-child,
+    .big-three-narrative-title span:last-child, .personality-context,
+    .transit-date, .transit-days, .transit-body-list,
+    .transit-subheading > span:last-child, .numerology-everyday,
+    .numerology-prompt, .glossary-style, .element-keywords,
+    .house-planets > span, .sign-card-date, .sign-card-meta) {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .app-shell main :is(.field-label, .location-lookup, .text-link, .hero-link,
+    .placement-caption, .transit-tabs button, .info-tip-content,
+    .info-tip-heading strong, .numerology-card-label,
+    .numerology-everyday strong, .numerology-prompt strong,
+    .personality-guidance strong, .big-three-trait strong,
+    .at-glance-sign strong, .at-glance-balance > strong,
+    .numerology-everyday-guide > strong, .transit-contact-copy strong) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .app-shell main :is(.field input, .field select) {
+    min-width: 0;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .app-shell main .info-tip-content {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    width: auto;
+    max-height: 45vh;
+    overflow-y: auto;
+    padding: 14px;
+    transform: none;
+  }
+
+  .app-shell main .info-tip-content::after {
+    display: none;
+  }
+
+  .app-shell main .info-tip-close {
+    width: 32px;
+    height: 32px;
+  }
+
+  .form-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-column,
+  .form-intro,
+  .birth-form,
+  .form-row .field {
+    min-width: 0;
+  }
+
+  .app-shell main :is(.house-card h3, .sign-card h3, .concept-card h3,
+    .glossary-card h3, .personality-life-heading h3,
+    .personality-card h3, .transit-focus-card h4, .numerology-theme) {
+    font-size: 18px;
+    line-height: 1.35;
+  }
+
+  .app-shell main :is(.eyebrow, .reading-kicker, .big-three-label,
+    .big-three-title, .personality-house) {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .quality-row {
+    grid-template-columns: minmax(60px, auto) minmax(20px, 1fr) 16px;
+    font-size: 12px;
+  }
+
+  .numerology-grid,
+  .element-explainer,
+  .house-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .placement-table-head,
+  .placement-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .7fr);
+    gap: 5px;
+  }
+
+  .placement-table-head {
+    min-height: 42px;
+    height: auto;
+    font-size: 12px;
+  }
+
+  .placement-table-head > span:not(:last-child) .info-tip:last-child {
+    display: inline-flex;
+  }
+
+  .placement-table-head .info-tip-content span:last-child {
+    display: inline;
+  }
+
+  .placement-row {
+    min-height: 52px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 13px;
+  }
+
+  .placement-planet {
+    gap: 2px;
+  }
+
+  .placement-planet > .placement-select {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 3px;
+    overflow-wrap: anywhere;
+  }
+
+  .placement-sign {
+    flex-wrap: wrap;
+  }
+
+  .placement-sign small,
+  .placement-house small {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
