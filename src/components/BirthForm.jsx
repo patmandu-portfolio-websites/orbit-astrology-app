@@ -22,30 +22,32 @@ function Field({ label, icon: Icon, children, hint }) {
   return <label className="field"><span className="field-label">{Icon && <Icon size={14} />}{label}</span>{children}{hint && <span className="field-hint">{hint}</span>}</label>;
 }
 
-export default function BirthForm({ onSubmit, busy, zodiacMode }) {
-  const [latitude, setLatitude] = useState(initial.latitude);
-  const [longitude, setLongitude] = useState(initial.longitude);
-  const [birthDate, setBirthDate] = useState(initial.birthDate);
-  const [birthTime, setBirthTime] = useState(initial.birthTime);
-  const [birthTimeUnknown, setBirthTimeUnknown] = useState(false);
-  const [timezoneId, setTimezoneId] = useState(() => timezoneForCoordinates(initial.latitude, initial.longitude));
-  const [automaticOffset, setAutomaticOffset] = useState(() => offsetForLocalDateTime(
-    timezoneForCoordinates(initial.latitude, initial.longitude),
-    initial.birthDate,
-    initial.birthTime,
-  ));
-  const [manualOffset, setManualOffset] = useState(null);
+export default function BirthForm({ onSubmit, busy, zodiacMode, initialValues, savesDetails = false }) {
+  const defaults = initialValues || initial;
+  const [latitude, setLatitude] = useState(defaults.latitude);
+  const [longitude, setLongitude] = useState(defaults.longitude);
+  const [birthDate, setBirthDate] = useState(defaults.birthDate);
+  const [birthTime, setBirthTime] = useState(defaults.birthTime);
+  const [birthTimeUnknown, setBirthTimeUnknown] = useState(defaults.birthTimeUnknown || false);
+  const [timezoneId, setTimezoneId] = useState(() => timezoneForCoordinates(defaults.latitude, defaults.longitude));
+  const [automaticOffset, setAutomaticOffset] = useState(null);
+  const [manualOffset, setManualOffset] = useState(() => initialValues && !initialValues.timezoneId
+    ? Number(initialValues.timezoneOffset) : null);
   const [timezoneError, setTimezoneError] = useState('');
   const [lookupBusy, setLookupBusy] = useState(false);
   const [lookupMessage, setLookupMessage] = useState('');
   const [lookupError, setLookupError] = useState('');
   const lastLookupAt = useRef(0);
+  const previousCoordinates = useRef({ latitude, longitude });
 
   useEffect(() => {
     try {
       const zone = timezoneForCoordinates(latitude, longitude);
       setTimezoneId(zone);
-      setManualOffset(null);
+      if (previousCoordinates.current.latitude !== latitude || previousCoordinates.current.longitude !== longitude) {
+        setManualOffset(null);
+      }
+      previousCoordinates.current = { latitude, longitude };
       setTimezoneError('');
     } catch (error) {
       setTimezoneError(error.message || 'Could not determine a time zone for these coordinates.');
@@ -149,7 +151,7 @@ export default function BirthForm({ onSubmit, busy, zodiacMode }) {
     </div>
     <label className="unknown-time-option"><input type="checkbox" checked={birthTimeUnknown} onChange={(event) => setBirthTimeUnknown(event.target.checked)} />I don’t know my birth time</label>
     {birthTimeUnknown && <p className="location-message">We use local noon as an approximate snapshot and sample the day for sign changes. Rising sign, houses, and time-dependent readings are omitted. The Moon and boundary signs may be uncertain.</p>}
-    <Field label="Birthplace" icon={MapPin}><input name="location" defaultValue={initial.location} placeholder="City, country" /></Field>
+    <Field label="Birthplace" icon={MapPin}><input name="location" defaultValue={defaults.location} placeholder="City, country" /></Field>
     <button className="location-lookup" type="button" onClick={handleLocationLookup} disabled={lookupBusy}>
       {lookupBusy ? <LoaderCircle size={14} className="spin" /> : <Search size={14} />}
       {lookupBusy ? 'Finding coordinates…' : 'Find coordinates'}
@@ -181,11 +183,11 @@ export default function BirthForm({ onSubmit, busy, zodiacMode }) {
     </Field>
     {timezoneError && <p className="location-message location-error" role="alert">{timezoneError}</p>}
     <div className="chart-options">
-      <Field label="Zodiac system"><select name="zodiacMode" defaultValue={zodiacMode || 'tropical'} disabled={Boolean(zodiacMode)}><option value="tropical">Tropical</option><option value="sidereal">Sidereal (Lahiri)</option></select></Field>
-      <Field label="House system"><select name="houseSystem" defaultValue="whole-sign" disabled={birthTimeUnknown}><option value="whole-sign">Whole Sign</option><option value="equal">Equal</option><option value="porphyry">Porphyry</option></select></Field>
+      <Field label="Zodiac system"><select name="zodiacMode" defaultValue={zodiacMode || defaults.zodiacMode || 'tropical'} disabled={Boolean(zodiacMode)}><option value="tropical">Tropical</option><option value="sidereal">Sidereal (Lahiri)</option></select></Field>
+      <Field label="House system"><select name="houseSystem" defaultValue={defaults.houseSystem || 'whole-sign'} disabled={birthTimeUnknown}><option value="whole-sign">Whole Sign</option><option value="equal">Equal</option><option value="porphyry">Porphyry</option></select></Field>
     </div>
     <button className="submit-button" type="submit" disabled={busy}>{busy ? <><LoaderCircle size={17} className="spin" />Calculating your chart…</> : <>Reveal my chart <span>→</span></>}</button>
-    <p className="privacy-note">Only your birthplace search is sent to OpenStreetMap Nominatim. Time-zone lookup is offline; your birth details and numerology name stay in this browser.</p>
+    <p className="privacy-note">Only your birthplace search is sent to OpenStreetMap Nominatim. Time-zone lookup is offline. {savesDetails ? 'Your birth details and chart settings are saved in this browser when you calculate your chart; names are not saved.' : 'These comparison details and names are not saved.'}</p>
     <p className="location-attribution">Location search by <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noreferrer">Nominatim</a> · © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p>
   </form>;
 }

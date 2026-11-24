@@ -48,8 +48,26 @@ export default function TransitReadings({ chart }) {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 15 * 60 * 1000);
-    return () => clearInterval(interval);
+    let timer;
+    function refresh() {
+      clearTimeout(timer);
+      const current = new Date();
+      setNow(current);
+      const midnight = new Date(current);
+      midnight.setHours(24, 0, 0, 0);
+      timer = setTimeout(refresh, Math.min(midnight - current, 15 * 60 * 1000));
+    }
+    function refreshWhenVisible() {
+      if (!document.hidden) refresh();
+    }
+    refresh();
+    window.addEventListener('focus', refresh);
+    document.addEventListener('visibilitychange', refreshWhenVisible);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('focus', refresh);
+      document.removeEventListener('visibilitychange', refreshWhenVisible);
+    };
   }, []);
 
   const day = useMemo(() => dailyReading(chart, now), [chart, now]);

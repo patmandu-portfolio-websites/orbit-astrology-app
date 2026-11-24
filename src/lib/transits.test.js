@@ -46,3 +46,19 @@ test('daily and weekly cards provide complete beginner guidance for all twelve h
   }
   assert.equal(seen.size, 12);
 });
+
+test('daily and rolling seven-day readings use the new day’s planetary positions', () => {
+  const firstDay = new Date(2026, 10, 25, 12);
+  const nextDay = new Date(2026, 10, 26, 12);
+  const day = dailyReading(chart, firstDay);
+  const nextDaily = dailyReading(chart, nextDay);
+  const week = weeklyReading(chart, firstDay);
+  const nextWeek = weeklyReading(chart, nextDay);
+
+  assert.notDeepEqual(day.contacts.map(({ key, orb }) => [key, orb]), nextDaily.contacts.map(({ key, orb }) => [key, orb]));
+  assert.equal(week.startDate.getDate(), 25);
+  assert.equal(week.endDate.getDate(), 1);
+  assert.equal(nextWeek.startDate.getDate(), 26);
+  assert.equal(nextWeek.endDate.getDate(), 2);
+  assert.notDeepEqual(week.contacts.map(({ key, orb }) => [key, orb]), nextWeek.contacts.map(({ key, orb }) => [key, orb]));
+});

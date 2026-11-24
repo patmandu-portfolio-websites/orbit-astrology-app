@@ -12,11 +12,29 @@ import DateOnlyReading from './components/DateOnlyReading.jsx';
 import CelestialRibbon from './components/CelestialRibbon.jsx';
 import CompatibilityScreen from './components/CompatibilityScreen.jsx';
 
+const savedBirthDetailsKey = 'orbit-birth-details';
+
+function restoreBirthDetails() {
+  try {
+    const saved = localStorage.getItem(savedBirthDetailsKey);
+    if (!saved) return { values: null, chart: null, error: '' };
+    const values = JSON.parse(saved);
+    const chart = values.birthTimeUnknown ? calculateDateOnlyChart(values) : calculateChart(values);
+    return { values, chart, error: '' };
+  } catch {
+    return { values: null, chart: null, error: 'Could not restore saved birth details. Please enter them again.' };
+  }
+}
+
 export default function App() {
-  const [chart, setChart] = useState(null);
+  const [restored] = useState(restoreBirthDetails);
+  const [chart, setChart] = useState(restored.chart);
   const [person, setPerson] = useState('');
-  const [numerologyDetails, setNumerologyDetails] = useState(null);
+  const [numerologyDetails, setNumerologyDetails] = useState(() => restored.values
+    ? { birthDate: restored.values.birthDate, birthName: '' } : null);
   const [error, setError] = useState('');
+  const [storageError, setStorageError] = useState(restored.error);
+  const [hasSavedDetails, setHasSavedDetails] = useState(Boolean(restored.values));
   const [busy, setBusy] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [comparisonOpen, setComparisonOpen] = useState(false);
@@ -26,9 +44,29 @@ export default function App() {
       const result = values.birthTimeUnknown ? calculateDateOnlyChart(values) : calculateChart(values);
       setChart(result); setPerson(values.name || '');
       setNumerologyDetails({ birthDate: values.birthDate, birthName: values.birthName || '' });
+      const { birthDate, birthTime, birthTimeUnknown, location, latitude, longitude, timezoneOffset, timezoneId, zodiacMode, houseSystem } = values;
+      try {
+        localStorage.setItem(savedBirthDetailsKey, JSON.stringify({
+          birthDate, birthTime, birthTimeUnknown, location, latitude, longitude, timezoneOffset, timezoneId,
+          zodiacMode, houseSystem: houseSystem || 'whole-sign',
+        }));
+        setHasSavedDetails(true);
+        setStorageError('');
+      } catch {
+        setStorageError('Your chart was calculated, but your birth details could not be saved in this browser.');
+      }
       requestAnimationFrame(() => document.getElementById('chart')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     } catch (err) { setError(err.message || 'We couldn’t calculate this chart. Check the details and try again.'); }
     finally { setBusy(false); }
+  }
+  function clearSavedDetails() {
+    try {
+      localStorage.removeItem(savedBirthDetailsKey);
+      setHasSavedDetails(false);
+      setStorageError('');
+    } catch {
+      setStorageError('Could not remove saved birth details from this browser.');
+    }
   }
   return <div className="app-shell">
     <div hidden={comparisonOpen}>
@@ -36,7 +74,7 @@ export default function App() {
     <main id="top"><section className="hero-section"><div className="hero-copy"><div className="hero-eyebrow"><span /> A SKY THAT'S UNIQUELY YOURS</div><h1>The sky at your<br /><em>beginning.</em></h1><p className="hero-lede">A birth chart is a little like a cosmic snapshot: the planets, signs, and houses all captured in the moment you arrived. Let’s see what yours says.</p><a href="#birth-form" className="hero-link">Discover your chart <span><ArrowDown size={16} /></span></a><div className="hero-footnote"><span className="tiny-stars">✳ ✦</span><span>Thoughtful astrology, made easy to explore.</span></div></div><div className="hero-art" aria-label="Illustration of the night sky and zodiac"><div className="art-wash" /><div className="art-sun" /><div className="art-orbit orbit-one" /><div className="art-orbit orbit-two" /><div className="art-orbit orbit-three" /><span className="art-star star-a">✧</span><span className="art-star star-b">✳</span><span className="art-star star-c">✦</span><span className="art-star star-d">·</span><span className="art-zodiac zodiac-a">♈</span><span className="art-zodiac zodiac-b">♋</span><span className="art-zodiac zodiac-c">♎</span><span className="art-zodiac zodiac-d">♑</span><span className="art-caption">YOUR SKY, AT THE MOMENT OF BIRTH</span></div></section>
       <CelestialRibbon />
       {chart && <button type="button" id="compare-launch" className="submit-button compare-launch" onClick={() => setComparisonOpen(true)}>Compare with another person</button>}
-      <section className="form-section" id="birth-form"><div className="form-intro"><span className="eyebrow">Start with the details</span><h2>Your story<br />starts <em>here.</em></h2><p>The closer your birth time is, the more personal your chart. Even a few minutes can shift your rising sign.</p><div className="form-tip"><span>✦</span><p>Not sure of the exact time? Check your birth certificate, or ask family. You can still explore planetary signs without it.</p></div><div className="form-step"><span>01</span><span>YOUR BIRTH DETAILS</span><i /></div></div><div className="form-column"><BirthForm onSubmit={handleSubmit} busy={busy} />{error && <div className="form-error" role="alert">{error}</div>}</div></section>
+      <section className="form-section" id="birth-form"><div className="form-intro"><span className="eyebrow">Start with the details</span><h2>Your story<br />starts <em>here.</em></h2><p>The closer your birth time is, the more personal your chart. Even a few minutes can shift your rising sign.</p><div className="form-tip"><span>✦</span><p>Not sure of the exact time? Check your birth certificate, or ask family. You can still explore planetary signs without it.</p></div><div className="form-step"><span>01</span><span>YOUR BIRTH DETAILS</span><i /></div></div><div className="form-column"><BirthForm onSubmit={handleSubmit} busy={busy} initialValues={restored.values} savesDetails />{hasSavedDetails && <button type="button" className="location-lookup" onClick={clearSavedDetails}>Forget saved birth details</button>}{storageError && <div className="form-error" role="alert">{storageError}</div>}{error && <div className="form-error" role="alert">{error}</div>}</div></section>
       {chart ? <>{chart.birthTimeUnknown ? <DateOnlyReading chart={chart} /> : <ChartSummary chart={chart} personName={person} />}<NumerologyReading {...numerologyDetails} chart={chart} />{!chart.birthTimeUnknown && <HouseGuide chart={chart} />}</> : <section className="empty-preview"><div className="empty-wheel"><div className="empty-wheel-inner"><span>✳</span><span>YOUR<br />CHART</span><small>✦ &nbsp; ☽ &nbsp; ✧</small></div></div><div><span className="eyebrow">Waiting for your details</span><h2>Your chart is a map<br />of the <em>moment.</em></h2><p>Enter your birth details above to discover your planetary placements and see how the houses shape your personal sky.</p><a href="#birth-form" className="empty-link">Start with your birth details <span>↓</span></a></div></section>}
       <SignGuide /><SymbolGuide />
       <section className="closing-banner"><div className="closing-decoration">✳</div><span className="eyebrow">Keep looking up</span><h2>Your chart is a beginning,<br />not a <em>box.</em></h2><p>Use these symbols as a language for reflection. You get to decide what resonates and what you make of it.</p><a href="#birth-form" className="submit-button closing-button">Revisit your chart <span>↑</span></a></section>
